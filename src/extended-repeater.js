@@ -1,22 +1,27 @@
-const { NotImplementedError } = require('../extensions/index.js');
+const { NotImplementedError } = require("../extensions/index.js");
 
 /**
  * Create a repeating string based on the given parameters
- *  
+ *
  * @param {String} str string to repeat
- * @param {Object} options options object 
+ * @param {Object} options options object
  * @return {String} repeating string
- * 
+ *
  *
  * @example
- * 
- * repeater('STRING', { repeatTimes: 3, separator: '**', 
+ *
+ * repeater('STRING', { repeatTimes: 3, separator: '**',
  * addition: 'PLUS', additionRepeatTimes: 3, additionSeparator: '00' })
  * => 'STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS'
  *
  */
 function repeater(str, options) {
-  let additionString = options.addition ? options.addition : "";
+  let additionString =
+    options.addition ||
+    typeof options.addition === "boolean" ||
+    options.addition === null
+      ? options.addition
+      : "";
   const separator = options.separator ? options.separator : "+";
   const additionSeparator = options.additionSeparator
     ? options.additionSeparator
@@ -26,7 +31,7 @@ function repeater(str, options) {
     additionString += `${additionSeparator}${options.addition}`;
   }
 
-  let string = str + additionString;
+  let string = `${str}${additionString}`;
 
   for (let i = 1; i < options.repeatTimes; i += 1) {
     string += `${separator}${str}${additionString}`;
@@ -35,5 +40,5 @@ function repeater(str, options) {
 }
 
 module.exports = {
-  repeater
+  repeater,
 };
