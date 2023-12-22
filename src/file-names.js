@@ -16,24 +16,9 @@ const { NotImplementedError } = require("../extensions/index.js");
  *
  */
 function renameFiles(names) {
-  // let arr = [];
-  // let index = 0;
-  // names.forEach((name) => {
-  //   index = arr.filter((item) => item === name).length;
-  //   if (index > 0) {
-  //     if (names.filter((el) => el === name).length === 1) {
-  //       arr.push(`${name}(${index + 1})`);
-  //     } else {
-  //       arr.push(`${name}(${index})`);
-  //     }
-  //   } else {
-  //     arr.push(name);
-  //   }
-  // });
-  // return arr;
   let newArr = [];
-  // let sorted = arr.filter(elem => elem !== -1).sort((a, b) => a- b);
   let j = 1;
+  let k = 1;
   for (let i = 0; i < names.length; i += 1) {
     if (!newArr.includes(names[i])) {
       newArr[i] = names[i];
@@ -44,15 +29,9 @@ function renameFiles(names) {
       newArr[i] = `${names[i]}(${j})`;
       j += 1;
     } else {
-      newArr[i] = `${names[i]}(${i})`;
+      newArr[i] = `${names[i]}(${k})`;
+      k += 1;
     }
-    // names.filter((item) => item === names[i]).length;
-    // if (arr[i] === -1) {
-    //   newArr[i] = arr[i]
-    // } else {
-    //   newArr[i] = sorted[j];
-    //   j += 1;
-    // }
   }
   return newArr;
 }
