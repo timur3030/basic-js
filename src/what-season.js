@@ -12,57 +12,25 @@ const { NotImplementedError } = require("../extensions/index.js");
  *
  */
 function getSeason(date) {
-  // if (
-  //   typeof date.getMonth !== "function" ||
-  //   typeof date === "string" ||
-  //   typeof date === "number" ||
-  //   Array.isArray(date)
-  // ) {
-  //   throw new Error("Invalid date!");
-  // }
+  const winter = [0, 1, 11];
+  const spring = [2, 3, 4];
+  const summer = [5, 6, 7];
+  const autumn = [8, 9, 10];
+
+  if (!date) {
+    return "Unable to determine the time of year!";
+  }
   if (
-    // date.getMonth() < 0 ||
-    // date.getMonth() > 11 ||
-    // typeof date.getMonth !== "function" ||
-    !(date instanceof Date) ||
-    // typeof date === "string" ||
-    // typeof date === "number" ||
-    // Array.isArray(date) ||
-    // !date.hasOwnProperty("getMonth")
-    // !Object.getPrototypeOf(date).hasOwnProperty("getDay")
-    // !Object.getOwnPropertyNames(Object.getPrototypeOf(date)).includes("getDay") ||
-    Object.prototype.toString.call(date) !== '[object Date]'
+    Object.getOwnPropertyNames(date).length != 0 ||
+    date instanceof Date === false
   ) {
-    throw new Error("Invalid date!");
-    // return "Unable to determine the time of year!";
+    throw Error("Invalid date!");
   }
-  // if (
-    // date.getMonth() < 0 ||
-    // date.getMonth() > 11 ||
-    // typeof date.getMonth !== "function" ||
-    // !(date instanceof Date) ||
-    // typeof date === "string" ||
-    // typeof date === "number" ||
-    // Array.isArray(date)
-    // !date.hasOwnProperty("getMonth")
-    // !Object.getPrototypeOf(date).hasOwnProperty("getDay")
-    // !Object.getOwnPropertyNames(Object.getPrototypeOf(date)).includes("getDay")
-  // ) {
-    // throw new Error("Invalid date!");
-  //   return "Unable to determine the time of year!";
-  // }
-  if ((date.getMonth() >= 0 && date.getMonth() < 2) || date.getMonth() === 11) {
-    return "winter";
-  }
-  if (date.getMonth() >= 2 && date.getMonth() < 5) {
-    return "spring";
-  }
-  if (date.getMonth() >= 5 && date.getMonth() < 8) {
-    return "summer";
-  }
-  if (date.getMonth() >= 8 && date.getMonth() < 11) {
-    return "autumn";
-  }
+
+  if (winter.includes(date.getMonth())) return "winter";
+  if (spring.includes(date.getMonth())) return "spring";
+  if (summer.includes(date.getMonth())) return "summer";
+  if (autumn.includes(date.getMonth())) return "autumn";
 }
 
 module.exports = {
