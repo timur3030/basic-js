@@ -22,9 +22,22 @@ function dateSample(sampleActivity) {
   // remove line with error and write your code here
 
   if (
+    Number.isNaN(+sampleActivity) ||
+    // !Number.isFinite(sampleActivity) ||
+    typeof +sampleActivity !== "number" ||
     typeof sampleActivity !== "string" ||
-    typeof +sampleActivity !== "number"
+    typeof sampleActivity === "boolean" ||
+    typeof sampleActivity === "undefined" ||
+    !sampleActivity
   ) {
+    return false;
+  }
+
+  let k = 0.693 / HALF_LIFE_PERIOD;
+  let t = Math.log(MODERN_ACTIVITY / +sampleActivity) / k;
+  if (isFinite(t) && t >= 0) {
+    return Math.ceil(t);
+  } else {
     return false;
   }
 }
