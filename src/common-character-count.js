@@ -16,17 +16,13 @@ function getCommonCharacterCount(s1, s2) {
   let index = 0;
   let one = s1.split(""),
     two = s2.split("");
-
   for (let i = 0; i < one.length; i += 1) {
-    index = two.indexOf(one[i], index);
+    index = two.indexOf(one[i]);
     if (index !== -1) {
-      index += 1;
+      two.splice(index, 1);
       result += 1;
-    } else {
-      break;
     }
   }
-
   return result;
 }
 
